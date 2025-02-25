@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import type { Product } from "~/types/product";
+import { ProductCard } from "~/components/ProductCard";
+import type { Product } from "~/types/Product";
 
 export function Welcome() {
   //ones on componenet/view creation
@@ -10,7 +11,7 @@ export function Welcome() {
       price: 0,
       description: "",
       category: "",
-      image: "",
+      image: "https://images-bonnier.imgix.net/files/ifo/production/20210713144653/SE-Gulerod-med-skr%C3%A6l.jpg?auto=compress,format&w=1024%201024w",
       rating: {
         rate: 0,
         count: 0,
@@ -19,10 +20,6 @@ export function Welcome() {
   ]);
 
   useEffect(() => {
-    /*async () => {
-      const result = await fetch("https://fakestoreapi.com/products");
-      console.log(result);
-    };*/
 
     async function fetchData() {
       const result = await fetch("https://fakestoreapi.com/products");
@@ -36,16 +33,16 @@ export function Welcome() {
     <div>
       {productList.map(
         ({ id, title, price, description, category, image, rating }) => (
-          <div>
-            <p>id: {id}</p>
-            <p>title: {title}</p>
-            <p>price: {price}</p>
-            <p>description: {description}</p>
-            <p>category: {category}</p>
-            <p>image: {image}</p>
-            <p>rating count: {rating.count}</p>
-            <p>rating rate: {rating.rate}</p>
-          </div>
+          <ProductCard
+            key={id}
+            id={id}
+            title={title}
+            price={price}
+            description={description}
+            category={category}
+            image={image}
+            rating={rating}
+          />
         )
       )}
     </div>
